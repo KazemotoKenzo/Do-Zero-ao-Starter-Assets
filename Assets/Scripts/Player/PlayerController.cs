@@ -7,9 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float move_speed;
+    [SerializeField]
+    private float rotationSpeed;
 
     private Vector2 input_direction;
     private Vector3 moveDirection;
+    
+    public Transform cam;
 
     public InputActionReference moveAction;
 
@@ -29,19 +33,20 @@ public class PlayerController : MonoBehaviour
     public void OnMove()
     {
         Vector2 input = moveAction.action.ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.x, 0, input.y);
+        Vector3 move = cam.forward * input.y + cam.right * input.x;
+        move.y = 0;
+        move.Normalize();
 
-        move = Vector3.ClampMagnitude(move, 1f);
-
-
-        if (move != Vector3.zero)
-            transform.forward = move;
+        if (move.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(move);
+            transform.rotation  = Quaternion.Slerp(
+                transform.rotation,
+                targetRotation,
+                rotationSpeed * Time.deltaTime
+            );
+        }
 
         _controller.Move(move * move_speed * Time.deltaTime);
-
-        //if (moveDirection.magnitude > Mathf.Epsilon)
-        //{
-        //    transform.rotation = Quaternion.LookRotation(moveDirection);
-        //}
     }
 }
