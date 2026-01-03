@@ -314,7 +314,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.13099289, y: 0.28044194, z: -0.038665123, w: 0.95010436}
-  m_LocalPosition: {x: -3.25, y: 2, z: -3.68}
+  m_LocalPosition: {x: -3.25, y: 1.2, z: -3.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -513,7 +513,7 @@ Transform:
   m_GameObject: {fileID: 448525011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -633,8 +633,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   move_speed: 2.5
   rotationSpeed: 20
+  jumpforce: 2
+  gravityScale: -30
   cam: {fileID: 330585546}
   moveAction: {fileID: -4898516049728963757, guid: 90ed08f31915eec66b917ca1041ad51b,
+    type: 3}
+  jumpAction: {fileID: 201646722287280301, guid: 90ed08f31915eec66b917ca1041ad51b,
     type: 3}
   _controller: {fileID: 448525017}
 --- !u!114 &448525019
