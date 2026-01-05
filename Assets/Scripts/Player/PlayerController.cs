@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum PlayerState
+{
+    Idle,
+    Walking,
+    Sprinting,
+    Jumping
+}
+
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
@@ -11,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private float rotationSpeed;
     public float jumpforce;
     public float gravityScale;
+
+    public PlayerState currentState;
 
     private Vector3 playerVel;
 
@@ -25,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        currentState = PlayerState.Idle;
     }
 
     void Update()
@@ -57,7 +68,7 @@ public class PlayerController : MonoBehaviour
             );
         }
 
-        if(isGrounded && jumpAction.action.WasPressedThisFrame())   playerVel.y = Mathf.Sqrt(jumpforce * -2 * gravityScale);
+        if(isGrounded && jumpAction.action.WasPressedThisFrame()) playerVel.y = Mathf.Sqrt(jumpforce * -2 * gravityScale);
 
         playerVel.y += gravityScale * Time.deltaTime;
         
